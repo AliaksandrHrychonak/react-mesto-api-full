@@ -3,13 +3,13 @@ const { errors } = require('celebrate');
 
 const app = express();
 
-const cors = require('cors')
 const { login, createUser } = require('./controllers/users')
 const cardsRouter = require('./routes/cards');
 const usersRouter = require('./routes/users');
 const auth = require('./middlewares/auth');
 const myErrors = require('./middlewares/errors')
 const NotFoundError = require('./errors/NotFoundError');
+const cors = require('./middlewares/cors')
 const {
   validateLogin,
   validateReqister,
@@ -24,19 +24,17 @@ const mongoose = require('mongoose', {
   useCreateIndex: true,
   useFindAndModify: false,
 });
-const options = {
-  origin: '*',
-  optionsSuccessStatus: 200,
-  methods: ['GET,HEAD,PUT,PATCH,POST,DELETE'],
-  credentials: true,
-};
 
-app.use(cors(options));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(requestLogger)
-
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+})
+app.use('*', cors)
 app.post('/signin', validateLogin, login);
 app.post('/signup', validateReqister, createUser);
 app.use('/', auth, cardsRouter);
