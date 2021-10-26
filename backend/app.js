@@ -24,7 +24,7 @@ const mongoose = require('mongoose', {
   useCreateIndex: true,
   useFindAndModify: false,
 });
-
+app.use('*', cors)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -34,7 +34,7 @@ app.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 })
-app.use('*', cors)
+
 app.post('/signin', validateLogin, login);
 app.post('/signup', validateReqister, createUser);
 app.use('/', auth, cardsRouter);
