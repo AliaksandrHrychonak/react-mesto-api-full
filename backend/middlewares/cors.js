@@ -1,7 +1,8 @@
 const allowedCors = [
   'http://alexgrichenokmesto.nomoredomains.monster',
   'https://alexgrichenokmesto.nomoredomains.monster',
-  'localhost:3000',
+  'https://localhost:3000',
+  'http://localhost:3000',
 ];
 
 // eslint-disable-next-line consistent-return
