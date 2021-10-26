@@ -1,0 +1,14 @@
+.access__option {
+  margin: 15px 0 0 0;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+}
+
+@media screen and (max-width: 500px) {
+  .access__option {
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 20px;
+  }
+}

@@ -1,0 +1,15 @@
+.access__input {
+  background-color: transparent;
+  width: 100%;
+  border: none;
+  color: #cccccc;
+  padding: 0;
+  margin: 0;
+  transition: color 0.1s linear;
+}
+
+.access__input:focus {
+  outline: 0;
+  outline-offset: 0;
+  color: #fff;
+}

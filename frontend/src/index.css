@@ -1,0 +1,81 @@
+/* global */
+@import "./vendor/normalize.css";
+@import "./fonts/fonts.css";
+@import "./blocks/root/root.css";
+@import "./blocks/page/page.css";
+@import "./blocks/main/main.css";
+/* header */
+@import "./blocks/header/header.css";
+@import "./blocks/header/__link/header__link.css";
+@import "./blocks/header/__logo/header__logo.css";
+@import "./blocks/header/__box-access/header__box-access.css";
+@import "./blocks/header/__mail/header__mail.css";
+@import "./blocks/header/__link/_type/header__link_type_access.css";
+/* profile */
+@import "./blocks/profile/profile.css";
+@import "./blocks/profile/__item/profile__item.css";
+@import "./blocks/profile/__section/profile__section.css";
+@import "./blocks/profile/__avatar/profile__avatar.css";
+@import "./blocks/profile/__avatar-edit/profile__avatar-edit.css";
+@import "./blocks/profile/__info/profile__info.css";
+@import "./blocks/profile/__button-edit/profile__button-edit.css";
+@import "./blocks/profile/__button-add/profile__button-add.css";
+@import "./blocks/profile/__info-title/profile__info-title.css";
+@import "./blocks/profile/__info-subtitle/profile__info-subtitle.css";
+/* elements */
+@import "./blocks/elements/elements.css";
+@import "./blocks/elements/__item/elements__item.css";
+@import "./blocks/elements/__button-delete/elements__button-delete.css";
+@import "./blocks/elements/__button-delete/_type/elements__delete-button_type_hidden.css";
+@import "./blocks/elements/__button-delete/_type/elements__delete-button_type_visible.css";
+@import "./blocks/elements/__card/elements__card.css";
+@import "./blocks/elements/__image/elements__image.css";
+@import "./blocks/elements/__information/elements__information.css";
+@import "./blocks/elements/__title/elements__title.css";
+@import "./blocks/elements/__container-like/elements__container-like.css";
+@import "./blocks/elements/__button-like/elements__button-like.css";
+@import "./blocks/elements/__quantity/elements__quantity.css";
+@import "./blocks/elements/__button-like/_active/elements__button-like_active.css";
+/* popup */
+@import "./blocks/popup/popup.css";
+@import "./blocks/popup/_type/popup_type_image.css";
+@import "./blocks/popup/__container/popup__container.css";
+@import "./blocks/popup/__container-image/popup__container-image.css";
+@import "./blocks/popup/_opened/popup_opened.css";
+@import "./blocks/popup/__button-close/popup__button-close.css";
+@import "./blocks/popup/__form/popup__form.css";
+@import "./blocks/popup/__input-container/popup__input-container.css";
+@import "./blocks/popup/__input/popup__input.css";
+@import "./blocks/popup/__title/popup__title.css";
+@import "./blocks/popup/__title/theme/popup__title_theme_delete.css";
+@import "./blocks/popup/__title/theme/popup__tile_theme_tooltip.css";
+@import "./blocks/popup/__button-save/popup__button-save.css";
+@import "./blocks/popup/__button-save/_disable/popup__button-save_disable.css";
+@import "./blocks/popup/__input/_border/popup__input_border_disabled.css";
+@import "./blocks/popup/__input/_value/popup__input_value_name.css";
+@import "./blocks/popup/__input/_value/popup__input_value_job.css";
+@import "./blocks/popup/__image/popup__image.css";
+@import "./blocks/popup/__description/popup__description.css";
+@import "./blocks/popup/__image-tooltip/popup__image-tooltip.css";
+@import "./blocks/popup/__image-tooltip/_type/popup__image-tooltip_type_not.css";
+@import "./blocks/popup/__image-tooltip/_type/popup__image-tooltip_type_done.css";
+/* footer */
+@import "./blocks/footer/footer.css";
+@import "./blocks/footer/__copyright/footer__copyright.css";
+
+@import "./blocks/error/error.css";
+
+/* ACCESS */
+@import "./blocks/access/access.css";
+@import "./blocks/access/__form/access__form.css";
+@import "./blocks/access/__title/access__title.css";
+@import "./blocks/access/__input/access__input.css";
+@import "./blocks/access/__button-submit/access__button-submit.css";
+@import "./blocks/access/__box-input/access__box-input.css";
+@import "./blocks/access/__box-input/_type/access__box-input_type_margin.css";
+@import "./blocks/access/__input-error/access__input-error.css";
+@import "./blocks/access/__option/access__option.css";
+@import "./blocks/access/__login-link/access__login-link.css";
+
+@import "./blocks/loader/loader.css";
+@import "./blocks/loader/__spinner/loader__spinner.css";

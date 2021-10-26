@@ -1,0 +1,14 @@
+.access {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #fff;
+  padding-bottom: 80px;
+}
+@media screen and (max-width: 500px) {
+  .access {
+    padding-bottom: 77px;
+  }
+}

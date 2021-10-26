@@ -1,0 +1,7 @@
+.access__box-input {
+  padding-bottom: 13px;
+  border-bottom: 2px solid #cccccc;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}

@@ -1,0 +1,8 @@
+.access__login-link {
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.3s linear;
+}
+.access__login-link:hover {
+  opacity: 0.6;
+}

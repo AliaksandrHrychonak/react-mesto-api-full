@@ -1,0 +1,14 @@
+.access__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 358px;
+  margin-top: 60px;
+}
+
+@media screen and (max-width: 500px) {
+  .access__form {
+    max-width: 260px;
+  }
+}
