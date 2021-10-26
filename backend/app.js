@@ -3,6 +3,7 @@ const { errors } = require('celebrate');
 
 const app = express();
 
+const cors = require('cors')
 const { login, createUser } = require('./controllers/users')
 const cardsRouter = require('./routes/cards');
 const usersRouter = require('./routes/users');
@@ -23,15 +24,26 @@ const mongoose = require('mongoose', {
   useCreateIndex: true,
   useFindAndModify: false,
 });
+const options = {
+  origin: '*',
+  optionsSuccessStatus: 200,
+  methods: ['GET,HEAD,PUT,PATCH,POST,DELETE'],
+  credentials: true,
+};
 
+app.use(cors(options));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use(requestLogger)
+
 app.post('/signin', validateLogin, login);
 app.post('/signup', validateReqister, createUser);
 app.use('/', auth, cardsRouter);
 app.use('/', auth, usersRouter);
+
 app.use(errorLogger)
+
 app.all('*', () => {
   throw new NotFoundError('Ресурс не найден');
 });
