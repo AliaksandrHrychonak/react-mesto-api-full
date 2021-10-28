@@ -22,6 +22,7 @@ frontend/.pnp.js
 frontend/coverage
 
 # production
+./backend/.env
 frontend/build
 ./frontend/build
 
