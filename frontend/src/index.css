@@ -1,6 +1,7 @@
 /* global */
 @import "./vendor/normalize.css";
 @import "./fonts/fonts.css";
+body{background-color: #000}
 @import "./blocks/root/root.css";
 @import "./blocks/page/page.css";
 @import "./blocks/main/main.css";

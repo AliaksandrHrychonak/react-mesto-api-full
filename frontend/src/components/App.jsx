@@ -69,7 +69,7 @@ export function App() {
         console.log(err)
       })
     }
-  }, [history]);
+  }, [history, loggedIn]);
 
   const handleCardLike = (card) => {
     const isLiked = card.likes.some((i) => i === currentUser._id);
