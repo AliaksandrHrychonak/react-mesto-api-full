@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint .",
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "deploy": "scp -r ./* alexgrichenok@62.84.114.184:/home/alexgrichenok/react-mesto-api-full/backend"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "celebrate": "^15.0.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-winston": "^4.2.0",
     "jsonwebtoken": "^8.5.1",

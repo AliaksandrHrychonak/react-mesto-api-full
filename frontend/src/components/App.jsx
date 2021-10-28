@@ -35,26 +35,14 @@ export function App() {
   //API
   React.useEffect(() => {
     setisLoading(true)
-    api
-      .getInitialCards()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setisLoading(false)
-      })
-    api
-      .getUserInfo()
-      .then((res) => {
-        setCurrentUser(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    Promise.all([api.getInitialCards(), api.getUserInfo()])
+    .then(([cards, user]) => {
+      setCards(cards);
+      setCurrentUser(user);
+    })
+    .catch((err) => console.log(err))
+    .finally(() => setisLoading(false));
+  }, [loggedIn]);
 
   React.useEffect(() => {
     setisLoading(true)
@@ -99,10 +87,9 @@ export function App() {
 
   const handleCardDelete = (card) => {
     setIsLoad(false);
-    api
-      .deleteCard(card._id)
+    api.deleteCard(card._id)
       .then(() => {
-        setCards(cards.filter((c) => c !== card._id));
+        setCards((cards) => cards.filter((c) => c._id !== card._id));
         setCardToDelete(null);
       })
       .catch((err) => {

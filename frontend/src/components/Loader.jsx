@@ -6,7 +6,6 @@ export const Loader = (props) => {
       <div className="loader__spinner">
       Loading...
     </div>
-  
     </div>
    ); 
 }
