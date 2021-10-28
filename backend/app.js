@@ -25,7 +25,7 @@ const mongoose = require('mongoose', {
   useCreateIndex: true,
   useFindAndModify: false,
 });
-app.use('*', cors)
+app.use(cors)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
