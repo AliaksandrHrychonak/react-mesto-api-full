@@ -1,22 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useForm from '../hooks/useForm'
 
-export const Register = ({onSubmit}) => {
-
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-
-  const handleEmail = (evt) => {
-    setEmail(evt.target.value);
-  };
-
-  const handlePassword = (evt) => {
-    setPassword(evt.target.value);
-  };
+export const Register = ({ onSubmit }) => {
+  const { values, handleChange, errors, isValid, resetForm } = useForm()
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    onSubmit(email,password)
+    if(isValid) {
+      onSubmit(values.email, values.password)
+      resetForm()
+    }
   };
 
   return (
@@ -30,11 +24,11 @@ export const Register = ({onSubmit}) => {
             name="email"
             className="access__input"
             placeholder="Email"
-            value={email}
-            onChange={handleEmail}
+            value={values.email || ''}
+            onChange={handleChange}
             required
           />
-          <span className="access__input-error"></span>
+          {errors.email && <span className="access__input-error">{errors.email}</span>}
         </div>
         <div className="access__box-input access__box-input_type_margin">
           <input
@@ -43,14 +37,15 @@ export const Register = ({onSubmit}) => {
             name="password"
             className="access__input"
             placeholder="Пароль"
-            value={password}
-            onChange={handlePassword}
+            minLength="8"
+            value={values.password || ''}
+            onChange={handleChange}
             required
           />
-          <span className="access__input-error"></span>
+          {errors.password && <span className="access__input-error">{errors.password}</span>}
         </div>
 
-        <button className="access__button-submit" type="submit">
+        <button disabled={!isValid} className={`access__button-submit ${!isValid && 'access__button-submit_type_disabled'}`} type="submit">
           Зарегистрироваться
         </button>
       </form>

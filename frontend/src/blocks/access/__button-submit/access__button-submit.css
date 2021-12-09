@@ -12,6 +12,10 @@
   cursor: pointer;
 }
 
+.access__button-submit_type_disabled {
+  opacity: 0.6;
+}
+
 .access__button-submit:hover {
   opacity: 0.85;
 }

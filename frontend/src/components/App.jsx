@@ -12,7 +12,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { api } from "../utils/api";
 import { Login } from "./Login";
 import { Register } from "./Register";
-import { Route, Redirect, Switch, useHistory } from "react-router-dom";
+import { Route, Redirect, Switch, useHistory, useLocation } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { auth } from "../utils/auth";
 import { InfoTooltip } from "./InfoTooltip";
@@ -32,31 +32,40 @@ export function App() {
   const [userEmail, setUserEmail] = React.useState(null);
   const [isLoading, setisLoading] = React.useState(false)
   const history = useHistory();
+  const location = useLocation()
   //API
   React.useEffect(() => {
-    setisLoading(true)
-    Promise.all([api.getInitialCards(), api.getUserInfo()])
-    .then(([cards, user]) => {
-      setCards(cards);
-      setCurrentUser(user);
-    })
-    .catch((err) => console.log(err))
-    .finally(() => setisLoading(false));
-  }, [loggedIn]);
+    if(loggedIn && location.pathname === '/') {
+      const jwt = localStorage.getItem("jwt")
+      setisLoading(true)
+      Promise.all([api.getInitialCards(jwt), api.getUserInfo(jwt)])
+      .then(([cards, user]) => {
+        setCards(cards);
+        setCurrentUser(user);
+        setisLoading(false)
+      })
+      .catch((err) => {
+        setisLoading(false)
+        console.log(err)
+      })
+    }
+  }, [location.pathname, loggedIn]);
 
   React.useEffect(() => {
-    setisLoading(true)
-    if (localStorage.getItem("jwt")) {
+    if (localStorage.getItem("jwt") && (location.pathname === '/sign-in' || location.pathname === 'sign-up') ) {
+      setisLoading(true)
       const jwt = localStorage.getItem("jwt");
       auth.getToken(jwt)
       .then((res) => {
         if (res) {
+          setisLoading(false)
           handleLogIn(true);
           setUserEmail(res.email);
           history.push("/");
         }
       })
       .catch((err) => {
+        setisLoading(false)
         handleLogIn(false);
         if (err.status === 400) {
           console.log('400 — Токен не передан или передан не в том формате')
@@ -69,12 +78,13 @@ export function App() {
         console.log(err)
       })
     }
-  }, [history, loggedIn]);
+  }, [history, location.pathname, loggedIn]);
 
   const handleCardLike = (card) => {
+    const token = localStorage.getItem("jwt")
     const isLiked = card.likes.some((i) => i === currentUser._id);
     api
-      .toggleLikeCard(card._id, !isLiked)
+      .toggleLikeCard(card._id, !isLiked, token)
       .then((newCard) => {
         setCards((state) =>
           state.map((c) => (c._id === card._id ? newCard : c))
@@ -86,8 +96,9 @@ export function App() {
   };
 
   const handleCardDelete = (card) => {
+    const token = localStorage.getItem("jwt")
     setIsLoad(false);
-    api.deleteCard(card._id)
+    api.deleteCard(card._id, token)
       .then(() => {
         setCards((cards) => cards.filter((c) => c._id !== card._id));
         setCardToDelete(null);
@@ -101,9 +112,10 @@ export function App() {
   };
 
   const handleUpdateAvatar = (data) => {
+    const token = localStorage.getItem("jwt")
     setIsLoad(true);
     api
-      .setAvatar(data)
+      .setAvatar(data, token)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
@@ -117,9 +129,10 @@ export function App() {
   };
 
   const handleUpdateUser = (data) => {
+    const token = localStorage.getItem("jwt")
     setIsLoad(true);
     api
-      .setUserInfo(data)
+      .setUserInfo(data, token)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
@@ -181,9 +194,10 @@ export function App() {
   };
 
   const handleAddPlaceSubmit = (newCard) => {
+    const token = localStorage.getItem("jwt")
     setIsLoad(true);
     api
-      .postCard(newCard)
+      .postCard(newCard, token)
       .then((res) => {
         setCards([res, ...cards]);
         closeAllPopups();
@@ -200,15 +214,14 @@ export function App() {
     auth
       .registration(email, password)
       .then((res) => {
-        handleTooltipOpen();
         if (res) {
-          history.push("/sign-in");
+          handleAuthorization(res.email, password)
         }
       })
       .catch((err) => {
         handleTooltipOpen();
         if(err.status === 400){
-          console.log('не передано одно из полей')
+          console.log('400 - не передано одно из полей')
           return
         }
         console.log(err);

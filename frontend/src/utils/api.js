@@ -11,26 +11,38 @@ class Api {
     return Promise.reject(`Ошибка ${res.status}`);
   }
 
-  getInitialCards() {
+  getInitialCards(jwt) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
-      headers: this._headers,  
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${jwt}`,
+      }, 
     })
     .then(this._handleResponce);
   }
 
-  getUserInfo() {
+  getUserInfo(jwt) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
-      headers: this._headers,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${jwt}`,
+      },
     })
     .then(this._handleResponce);
   }
 
-  setUserInfo( data ) {
+  setUserInfo( data, token ) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${token}`,
+      },
       body: JSON.stringify({
         name: data.name,
         about: data.about,
@@ -39,10 +51,14 @@ class Api {
     .then(this._handleResponce);
   }
 
-  postCard( data ) {
+  postCard( data, token ) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${token}`,
+      },
       body: JSON.stringify({
         name: data.name,
         link: data.link,
@@ -51,10 +67,14 @@ class Api {
     .then(this._handleResponce);
   }
   
-  setAvatar( data ) {
+  setAvatar( data, token ) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${token}`,
+      },
       body: JSON.stringify({
         avatar: data.avatar
       })
@@ -62,18 +82,26 @@ class Api {
     .then(this._handleResponce);
   }
 
-  deleteCard( cardId ) {
+  deleteCard( cardId, token ) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${token}`,
+      },
     })
     .then(this._handleResponce);
   }
 
-  toggleLikeCard( cardId, isLiked ) {
+  toggleLikeCard( cardId, isLiked, token ) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: isLiked ? 'PUT' : 'DELETE',
-      headers: this._headers,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${token}`,
+      },
     })
       .then(this._handleResponce);
   }
@@ -81,9 +109,4 @@ class Api {
 
 export const api = new Api({
   baseUrl: "https://api.alexgrichenokmesto.nomoredomains.monster",
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'authorization': `Bearer ${localStorage.getItem('jwt')}`,
-  },
 });
