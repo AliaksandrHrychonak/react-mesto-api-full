@@ -7,7 +7,7 @@
 
 ### Адрес фронтенд https://alexgrichenokmesto.nomoredomains.monster/
 ### Адрес бекенд https://api.alexgrichenokmesto.nomoredomains.monster/
-### IP сервера: 62.84.114.184
+### IP сервера: 51.250.4.187
 
 ### Репозиторий для полного приложения проекта `Mesto`, включающий фронтенд и бэкенд части приложения.
 ### Со следующими возможностями: 
